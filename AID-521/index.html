@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Abhishek Samantray, Vimal Kumar" />
+
+
+<title>Mathematics for Data Science</title>
+
+<script src="index_files/header-attrs-2.9/header-attrs.js"></script>
+<script src="index_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="index_files/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="index_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="index_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="index_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="index_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="index_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="index_files/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="index_files/navigation-1.1/tabsets.js"></script>
+<link href="index_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="index_files/highlightjs-9.12.0/highlight.js"></script>
+<script src="index_files/kePrint-0.0.1/kePrint.js"></script>
+<link href="index_files/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="2_style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Mathematics for Data Science</h1>
+<h3 class="subtitle">AID-521 | M.Tech in Data Science | IIT Roorkee</h3>
+<h4 class="author"><a href="https://www.iitr.ac.in/~HS/Abhishek_Samantray">Abhishek Samantray</a>, <a href="https://www.iitr.ac.in/~CH/vksinfch">Vimal Kumar</a></h4>
+<h4 class="date">Last updated: 30 July, 2021</h4>
+
+</div>
+
+
+<p> </p>
+<div class="info-box">
+<ul>
+<li><p>Kindly check this page for <a href="#Table1">revised date/time</a>, files of <a href="#Table1">lectures/exams</a>, and other <a href="#news">updates/news</a>.</p></li>
+<li><p>Course website: <a href="https://abhishek-website.github.io">abhishek-website.github.io</a></p></li>
+<li><p>MS Teams Class for the course: <a href="https://teams.microsoft.com/l/team/19%3asqAJXh_f1oSvkns86ZvJfsgVH2Y8HJrhp6pz0h7rFJs1%40thread.tacv2/conversations?groupId=7aff3af1-6f60-4ef7-86b9-60d942bf4b50&amp;tenantId=38f62926-7559-4aef-84ae-cb5e172406fb" target="_blank">click here</a></p></li>
+</ul>
+</div>
+<p> </p>
+<div id="news" class="green-box">
+<p><em>Notifications</em></p>
+<p>[2] Further notifications are available in the MS Teams Class</p>
+<p>[1] Academic calendar for Autumn 2021-22 session commences on 31/07/2021.</p>
+</div>
+<p> </p>
+<div id="about" class="section level1">
+<h1>About</h1>
+<div id="objectives" class="section level4 unlisted unnumbered">
+<h4 class="unlisted unnumbered">Objectives</h4>
+<ul>
+<li>To introduce to various mathematical concepts to be used in data science and machine learning</li>
+</ul>
+</div>
+<div id="prerequisites" class="section level4 unlisted unnumbered">
+<h4 class="unlisted unnumbered">Prerequisites</h4>
+<ul>
+<li>Nil</li>
+<li>For a revision of essential mathematical tools, <a href="#refreshers">these links</a> can be helpful</li>
+<li>Basic/advanced knowledge in matrices, calculus, probability will be helpful, but not necessary.</li>
+</ul>
+</div>
+<div id="syl" class="section level3">
+<h3>Syllabus</h3>
+<ul>
+<li><p>Basics of Linear Algebra</p>
+<p>representation of vectors; linear dependence and independence; vector space and subspaces (definition, examples and concepts of basis); linear transformations; range and null space; matrices associated with linear transformations; special matrices; eigenvalues and eigenvectors with applications to data problems; least square and minimum normed solutions</p></li>
+<li><p>Matrices in Machine Learning Algorithms</p>
+<p>projection transformation; orthogonal decomposition; singular value decomposition; principal component analysis and linear discriminant analysis</p></li>
+<li><p>Gradient Calculus</p>
+<p>basic concepts of calculus: partial derivatives, gradient, directional derivatives, Jacobian, Hessian</p></li>
+<li><p>Optimization</p>
+<p>convex sets, convex function and their properties, unconstrained and constrained optimization, numerical optimization techniques for unconstrained optimization, derivative-free methods (golden Section, fibonacci search method, bisecting method), methods using derivatives (newton’s method, steepest descent method), penalty function methods for constrained optimization.</p></li>
+<li><p>Probability</p>
+<p>basic concepts of probability, conditional probability, total probability, independent events, bayes’ theorem, random variable, moments, moment generating functions, some useful distributions, joint distribution, conditional distribution, transformation of random variables, covariance, correlation</p></li>
+<li><p>Statistics</p>
+<p>random sample, sampling techniques, statistics, sampling distributions, mixture models</p></li>
+</ul>
+</div>
+<div id="ref" class="section level3">
+<h3>References</h3>
+<ol style="list-style-type: upper-alpha">
+<li><p>Recommended</p>
+<ul>
+<li><p>M. P. Deisenroth, A. A. Faisal, C. S. Ong, Mathematics for Machine Learning, Cambridge University Press (1st edition), 2020 <a href="https://mml-book.github.io/book/mml-book.pdf"><em>Freely Available</em></a></p></li>
+<li><p>K. M. Ramachandran, C. P. Tsokos, Mathematical Statistics with Applications in R, Academic Press (2nd edition), 2015</p></li>
+</ul></li>
+<li><p>Optional/advanced/others</p>
+<ul>
+<li><p>S. Axler, Linear Algebra Done Right. Springer International Publishing (3rd edition)</p></li>
+<li><p>J. Nocedal and S. J. Wright, Numerical Optimization. New York: Springer Science+Business Media</p></li>
+<li><p>E. Kreyszig, Advanced Engineering Mathematics, John Wiley and Sons, Inc., U.K. (10th Edition)</p></li>
+<li><p>R. A. Johnson, I. Miller, and J. E.Freund, “Miller &amp; Freund’s Probability and Statistics for Engineers,” Prentice Hall PTR, (8th edition)</p></li>
+<li><p>C. Mohan and K. Deep: “Optimization Techniques,” New Age Publishers, New Delhi.</p></li>
+</ul></li>
+</ol>
+<hr />
+</div>
+</div>
+<div id="policy" class="section level1">
+<h1>Policies</h1>
+<p>Credits: 4</p>
+<p>Session: Autumn (August-December)</p>
+<div id="contact-hours" class="section level4 unlisted unnumbered">
+<h4 class="unlisted unnumbered">Contact Hours</h4>
+<ul>
+<li>Includes lectures and tutorials, and not exams</li>
+<li>Total - 42 hours, Per Week - 4 hours</li>
+<li>Classes during Autumn session 2021 are likely to be preponed, keep an eye on <a href="#sch">schedule</a> for updates</li>
+</ul>
+</div>
+<div id="evaluation" class="section level4 unlisted unnumbered">
+<h4 class="unlisted unnumbered">Evaluation</h4>
+<ul>
+<li>CWS - 30%
+<ul>
+<li>Homework/Assignment</li>
+<li>Groups of size 2-3 allowed</li>
+<li>2 take-home question papers, to be submitted by respective deadlines</li>
+</ul></li>
+<li>MTE - 30%
+<ul>
+<li>Mid Term Examination (institute schedule)</li>
+<li>Open book</li>
+</ul></li>
+<li>ETE - 40% (10+30)
+<ul>
+<li>End Term Examination (institute schedule)</li>
+<li>Exam Duration: 3 hours, Open book</li>
+</ul></li>
+<li>Re-exam
+<ul>
+<li>As per institute rules</li>
+</ul></li>
+<li>Attendance policy: As per institute rules. The requirement of attendance is waived off during the 2021-22 autumn semester. Hence, none of the components of evaluation will have the weightage for attendance. Students are recommended to attend all classes for a better learning experience.</li>
+</ul>
+</div>
+<div id="contact" class="section level4 unlisted unnumbered">
+<h4 class="unlisted unnumbered">Contact</h4>
+<ul>
+<li>Office hours (online): Appointment via class representative</li>
+<li>Email policy: Queries should be sent via class representative to Abhishek Samantray (coordinator) at <a href="mailto:abhishek.samantray@hs.iitr.ac.in" class="email">abhishek.samantray@hs.iitr.ac.in</a></li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="sch" class="section level1">
+<h1>Schedule</h1>
+<div id="Table1" class="forced_striped_rows">
+<table class="table table-striped table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
+<caption>
+Dates and links to files will be available gradually
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Date and Time
+</th>
+<th style="text-align:left;">
+Module
+</th>
+<th style="text-align:left;">
+Topic
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;width: 12em; ">
+<strong>HOMEWORKS</strong>
+</td>
+<td style="text-align:left;">
+Assignment 1 <strong>(Deadline: Sep 30)</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;">
+Assignment 2 <strong>(Deadline: Oct 30)</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+31.07.2021 / 10am
+</td>
+<td style="text-align:left;width: 12em; ">
+OVERVIEW
+</td>
+<td style="text-align:left;">
+Introduction to the course
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+03.08.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+PROBABILITY
+</td>
+<td style="text-align:left;">
+Random Events &amp; Probability, Calculation of Probabilities; Conditional probability, Independent events, Total probability, Bayes’ theorem
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+05.08.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;">
+Random Variable &amp; Probability Distribution (probability space, random variable, discrete/continuous probability); Moments &amp; expected values, Moment generating function
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+06.08.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;">
+<strong>Tutorial</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+07.08.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;">
+Discrete Probability Distributions; Binomial Distribution; Poisson Distribution
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+10.08.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;">
+Continuous Distribution; Gaussian/Normal Probability Distribution (Properties, Standard Normal, Applications); Conjugacy &amp; Exponential Family
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+12.08.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;">
+Joint Distribution - Calculation; Summary Statistics &amp; Independence (covariance, correlation, independence); Multivariate Normal &amp; Properties
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+13.08.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;">
+Functions, Transformation of random variables, Change of variables/inverse transform
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+17.08.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;">
+<strong>Tutorial</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+20.08.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+STATISTICS
+</td>
+<td style="text-align:left;">
+Data &amp; Statistics: Model, Sample/Population, Spec-Est-Inf; Random sample, Sampling techniques, Statistic; Limit Theorems
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+21.08.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;">
+Numeric Description - Central Tendencies, Dispersion, Position &amp; Outliers; Graphic Description - Rel Frequencies, Histograms, Boxplots; Dist, Percentiles (&amp; Ranks)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+24.08.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;">
+Sampling distributions - of Sample Mean &amp; Median (Under Normality, Non-Normality), - of Binomial Random Variable; Chi-squared &amp; F tests; Order Statistics
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+26.08.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;">
+Estimation - Point estimation &amp; Properties, Interval estimation; Bootstrap
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+27.08.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;">
+<strong>Tutorial</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+31.08.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;">
+Inference - Hypothesis testing; CI, Sample Size, Type I &amp; II Errors, P-value, T-test
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+02.09.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;">
+Specification - Regression and correlation; ANOVA; Mixture models, Advanced models
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+03.09.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;">
+<strong>Tutorial</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+04.09.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+LINEAR ALGEBRA
+</td>
+<td style="text-align:left;">
+Vector representation; Linear dependence and independence; Vector space and subspaces
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+07.09.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;">
+Linear transformations; range and null space
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+09.09.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;">
+Matrices associated with linear transformations; Special matrices
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+14.09.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;">
+<strong>Tutorial</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+16.09.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;">
+Eigenvalues and eigenvectors; Applications of eigenvalues and eigenvectors to data problems
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+17.09.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;">
+<strong>Tutorial</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+18.09.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;">
+<em>Revision &amp; Q/A</em>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+(20-23).09.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+<strong>EXAM</strong>
+</td>
+<td style="text-align:left;">
+Mid Term Examination
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+28.09.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+MATRICES IN ML
+</td>
+<td style="text-align:left;">
+Projection transformation; Orthogonal decomposition; Singular value decomposition
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+30.09.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;">
+Principal component analysis; Multidimensional scaling
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+01.10.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;">
+Linear discriminant analysis
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+05.10.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;">
+<strong>Tutorial</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+07.10.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+GRADIENT CALCULUS
+</td>
+<td style="text-align:left;">
+Least square and minimum normed solutions
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+08.10.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;">
+Basic concepts of calculus; Partial derivatives
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+12.10.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;">
+Gradients of Vector-Valued Functions and Matrices
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+14.10.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;">
+Automatic Differentiation (Jacobian)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+21.10.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;">
+Higher-Order Derivatives (Hessians); Linearization and Multivariate Taylor Series
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+22.10.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;">
+<strong>Tutorial</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+23.10.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+OPTIMIZATION
+</td>
+<td style="text-align:left;">
+Convex sets, Convex function and their properties
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+26.10.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;">
+Unconstrained and Constrained Optimization, Numerical Optimization Techniques for Unconstrained Optimization
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+28.10.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;">
+Derivative-Free methods (Golden Section, Fibonacci Search Method, Bisecting Method) – Part 1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+29.10.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;">
+Derivative-Free methods (Golden Section, Fibonacci Search Method, Bisecting Method) – Part 2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+02.11.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;">
+<strong>Tutorial</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+09.11.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;">
+Methods using Derivatives (Newton’s Method, Steepest Descent Method)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+11.11.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;">
+Penalty Function Methods for Constrained Optimization
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+12.11.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+</td>
+<td style="text-align:left;">
+<strong>Tutorial</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 12em; ">
+(15-26).11.2021
+</td>
+<td style="text-align:left;width: 12em; ">
+<strong>EXAM</strong>
+</td>
+<td style="text-align:left;">
+End Term Examination
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+</div>
+<div id="oth" class="section level1">
+<h1>Other Resources</h1>
+<div id="refreshers" class="section level3">
+<h3>Basic Math Tools</h3>
+<p>You may use the external links below to refresh basic concepts/tools in mathematics, which will be frequently used throughout this course.</p>
+<ul>
+<li><p>Sets and Matrices: <a href="https://course.ccs.neu.edu/cs5002f18-seattle/lects/cs5002_lect4_fall18_notes_blank.pdf" target="_blank">Link 1</a></p></li>
+<li><p>Mappings and Functions: <a href="https://irp-cdn.multiscreensite.com/f15f3f52/files/uploaded/MSG.14.Relations%2C%20Functions%20and%20Graphs%20.pdf" target="_blank">Link 1</a></p></li>
+<li><p>Graphs <a href="http://www.math.utah.edu/~wortman/1050-text-itg.pdf" target="_blank">Link 1</a>, <a href="https://www.sydney.edu.au/content/dam/students/documents/mathematics-learning-centre/functions-and-graphs.pdf" target="_blank">Link 2</a></p></li>
+<li><p>Trigonometry <a href="https://ncert.nic.in/textbook/pdf/jemh108.pdf" target="_blank">Link 1</a>, <a href="https://www.govst.edu/uploadedFiles/Academics/Colleges_and_Programs/CAS/Trigonometry_Short_Course_Tutorial_Lauren_Johnson.pdf" target="_blank">Link 2</a>, <a href="http://uregina.ca/~maidornp/files/m102trignotes.pdf" target="_blank">Link 3</a>, <a href="https://tutorial.math.lamar.edu/pdf/Trig_Cheat_Sheet.pdf" target="_blank">Link 4</a></p></li>
+<li><p>Derivatives and Integration <a href="http://pages.stat.wisc.edu/~ifischer/calculus.pdf" target="_blank">Link 1</a>, <a href="https://tutorial.math.lamar.edu/pdf/common_derivatives_integrals.pdf" target="_blank">Link 2</a></p></li>
+</ul>
+<p>If you have time, you may consider <a href="http://www.math.nagoya-u.ac.jp/~richard/teaching/f2016/BasicCalculus.pdf" target="_blank">this link</a>, which contains chapters on all the above topics.</p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
